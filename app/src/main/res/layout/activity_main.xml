@@ -5,10 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <dime.android.apkcv.ui.views.BubbleView
+    <dime.android.apkcv.ui.views.buble.BubbleView
         android:id="@+id/bubble_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:background_color="?attr/colorPrimary" />
+        app:background_color="?attr/colorPrimary"
+        app:text_color="@color/myname_text_color"
+        app:bubble_timeline_color="@color/timeline_color"
+        app:text="@string/myname"/>
 
 </RelativeLayout>

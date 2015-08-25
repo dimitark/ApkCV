@@ -2,4 +2,8 @@
 <resources>
     <color name="primary">#37474F</color>
     <color name="primary_dark">#263238</color>
+    <color name="myname_text_color">#e2e2e2</color>
+
+    <color name="timeline_color">#558B2F</color>
+    <color name="timeline_dark_color">#33691E</color>
 </resources>

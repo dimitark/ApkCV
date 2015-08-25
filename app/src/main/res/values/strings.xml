@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ApkCV</string>
+    <string name="myname">{Dimitar Kotevski}</string>
 </resources>
