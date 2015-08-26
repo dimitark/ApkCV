@@ -5,5 +5,10 @@
         <attr name="text_color" format="reference|color" />
         <attr name="text" format="reference|string" />
         <attr name="bubble_timeline_color" format="reference|color" />
+        <attr name="bubble_timeline_secondary_color" format="reference|color" />
+        <attr name="bubble_projects_color" format="reference|color" />
+        <attr name="bubble_projects_secondary_color" format="reference|color" />
+        <attr name="bubble_skills_color" format="reference|color" />
+        <attr name="bubble_skills_secondary_color" format="reference|color" />
     </declare-styleable>
 </resources>

@@ -4,6 +4,10 @@
     <color name="primary_dark">#263238</color>
     <color name="myname_text_color">#e2e2e2</color>
 
-    <color name="timeline_color">#558B2F</color>
-    <color name="timeline_dark_color">#33691E</color>
+    <color name="timeline_color">#C62828</color>
+    <color name="timeline_dark_color">#B71C1C</color>
+    <color name="projects_color">#558B2F</color>
+    <color name="projects_dark_color">#33691E</color>
+    <color name="skills_color">#1565C0</color>
+    <color name="skills_dark_color">#0D47A1</color>
 </resources>

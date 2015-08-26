@@ -12,6 +12,11 @@
         app:background_color="?attr/colorPrimary"
         app:text_color="@color/myname_text_color"
         app:bubble_timeline_color="@color/timeline_color"
+        app:bubble_timeline_secondary_color="@color/timeline_dark_color"
+        app:bubble_projects_color="@color/projects_color"
+        app:bubble_projects_secondary_color="@color/projects_dark_color"
+        app:bubble_skills_color="@color/skills_color"
+        app:bubble_skills_secondary_color="@color/skills_dark_color"
         app:text="@string/myname"/>
 
 </RelativeLayout>
