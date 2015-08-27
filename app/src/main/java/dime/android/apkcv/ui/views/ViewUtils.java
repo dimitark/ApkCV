@@ -1,5 +1,6 @@
 package dime.android.apkcv.ui.views;
 
+import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
@@ -98,5 +99,29 @@ public class ViewUtils {
 
         // and set it into the paint
         textPaint.setTextSize(size);
+    }
+
+    /**
+     * Dips to Pixels
+     *
+     * @param context
+     * @param dips
+     * @return
+     */
+    public static int dipsToPixels(Context context, float dips) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return Math.round(dips * scale);
+    }
+
+    /**
+     * Pixels to Dips
+     *
+     * @param context
+     * @param pixels
+     * @return
+     */
+    public static float pixelsToDips(Context context, int pixels) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return pixels / scale;
     }
 }

@@ -3,6 +3,7 @@
     <color name="primary">#37474F</color>
     <color name="primary_dark">#263238</color>
     <color name="myname_text_color">#e2e2e2</color>
+    <color name="grey_color">#929292</color>
 
     <color name="timeline_color">#C62828</color>
     <color name="timeline_dark_color">#B71C1C</color>

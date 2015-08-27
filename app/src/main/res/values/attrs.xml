@@ -11,4 +11,8 @@
         <attr name="bubble_skills_color" format="reference|color" />
         <attr name="bubble_skills_secondary_color" format="reference|color" />
     </declare-styleable>
+    <declare-styleable name="ChartView">
+        <attr name="chart_timeline_color" format="reference|color" />
+        <attr name="chart_bars_color" format="reference|color" />
+    </declare-styleable>
 </resources>

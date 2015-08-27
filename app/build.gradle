@@ -12,8 +12,19 @@ android {
         versionName "1.0"
     }
     buildTypes {
-        release {
+        debug {
+            debuggable true
             minifyEnabled false
+
+            // Constants
+            buildConfigField "String", "REST_URL", "\"http://ec2-52-3-16-181.compute-1.amazonaws.com:3000/\""
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+
+            // Constants
+            buildConfigField "String", "REST_URL", "\"http://ec2-52-3-16-181.compute-1.amazonaws.com:3000/\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -27,4 +38,9 @@ dependencies {
     // https://github.com/square/picasso
     // Apache License, Version 2.0
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    // Retrofit - A type-safe REST client for Android and Java
+    // http://square.github.io/retrofit/
+    // Apache License, Version 2.0
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
 }

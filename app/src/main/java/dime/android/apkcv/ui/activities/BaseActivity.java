@@ -14,7 +14,7 @@ import dime.android.apkcv.Utils;
  */
 public class BaseActivity<App> extends ActionBarActivity {
     // Reference to the app
-    private App app;
+    protected App app;
 
     // The Window object. Not null only if the version is >= LOLLIPOP
     protected Window window;

@@ -14,6 +14,10 @@ import com.squareup.picasso.Target;
 import dime.android.apkcv.App;
 import dime.android.apkcv.R;
 import dime.android.apkcv.Utils;
+import dime.android.apkcv.data.rest.ResponseHandler;
+import dime.android.apkcv.data.rest.RestTask;
+import dime.android.apkcv.data.rest.RestTaskRunnable;
+import dime.android.apkcv.data.rest.bio.Bio;
 import dime.android.apkcv.ui.views.buble.BubbleClickListener;
 import dime.android.apkcv.ui.views.buble.BubbleColorScheme;
 import dime.android.apkcv.ui.views.buble.BubbleView;
@@ -34,24 +38,41 @@ public class MainActivity extends BaseActivity<App> implements BubbleClickListen
         bubbleView = (BubbleView) findViewById(R.id.bubble_view);
         bubbleView.setBubbleClickListener(this);
 
+
         // TODO Test
-        Picasso
-                .with(this)
-                .load("https://scontent-fra3-1.xx.fbcdn.net/hphotos-xft1/t31.0-8/11402455_10207562504006696_7784059285010925527_o.jpg")
-                .into(new Target() {
-                    @Override
-                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                        bubbleView.setMainImage(bitmap);
-                    }
+        final Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                bubbleView.setMainImage(bitmap);
+            }
 
-                    @Override
-                    public void onBitmapFailed(Drawable errorDrawable) {
-                    }
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+            }
 
-                    @Override
-                    public void onPrepareLoad(Drawable placeHolderDrawable) {
-                    }
-                });
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        };
+        bubbleView.setTag(target); // Picasso uses weak references
+        new RestTask<>(new ResponseHandler<Bio>() {
+            @Override
+            public void success(Bio bio) {
+                Picasso
+                        .with(MainActivity.this)
+                        .load(bio.getImage())
+                        .into(target);
+            }
+
+            @Override
+            public void error() {
+            }
+        }).execute(new RestTaskRunnable<Bio>() {
+            @Override
+            public Bio run() {
+                return app.getBioService().getBio();
+            }
+        });
     }
 
     @Override
@@ -82,7 +103,7 @@ public class MainActivity extends BaseActivity<App> implements BubbleClickListen
         intent.putExtra(DetailsActivity.EXTRA_SECONDARY_COLOR_KEY, colorScheme.secondaryColor);
         // Open the activity
         startActivity(intent);
-        // TODO Set fancy fade animation
+        // We don't want any transition animation
         overridePendingTransition(0, 0);
     }
 }
