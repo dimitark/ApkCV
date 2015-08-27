@@ -14,5 +14,6 @@
     <declare-styleable name="ChartView">
         <attr name="chart_timeline_color" format="reference|color" />
         <attr name="chart_bars_color" format="reference|color" />
+        <attr name="chart_animate_intro" format="boolean" />
     </declare-styleable>
 </resources>

@@ -1,5 +1,7 @@
 package dime.android.apkcv.ui.views.chart;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -8,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.animation.BounceInterpolator;
 
 import dime.android.apkcv.R;
 import dime.android.apkcv.ui.views.BaseView;
@@ -16,7 +19,7 @@ import dime.android.apkcv.ui.views.ViewUtils;
 /**
  * Created by dime on 27/08/15.
  */
-public class ChartView extends BaseView {
+public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateListener {
     // The desired height of a single cell
     private final int DESIRED_CELL_HEIGHT = ViewUtils.dipsToPixels(getContext(), 25f);
     private final int TIMELINE_TEXT_HEIGHT = ViewUtils.dipsToPixels(getContext(), 20f);
@@ -27,6 +30,10 @@ public class ChartView extends BaseView {
     private final float BARS_STROKE_WIDTH = 5f;
     private final float BARS_TEXT_SIZE_IN_SP = 30f;
 
+    // Should we animate the into?
+    private boolean animateIntro;
+    private ValueAnimator introAnimation;
+
     // The width of a single unit
     private int unitWidth;
 
@@ -34,6 +41,7 @@ public class ChartView extends BaseView {
     private int barsLocationLeft;
     private int[] barsLocationY;
     private int[] barsLocationRight;
+    private int[] barsLocationRightAnimated;
     private int barCircleRadius;
     private int[] barTextY;
 
@@ -105,16 +113,22 @@ public class ChartView extends BaseView {
         barsLocationLeft = -10;
         barsLocationY = new int[adapter.getItemsCount()];
         barsLocationRight = new int[adapter.getItemsCount()];
+        barsLocationRightAnimated = new int[adapter.getItemsCount()];
         barTextY = new int[adapter.getItemsCount()];
         // The radius of the circle at the end of the bars
         barCircleRadius = DESIRED_CELL_HEIGHT / 6;
-
 
         // Loop through all of the items in the adapter, and calculate their specific dimensions
         for (int i=0; i<adapter.getItemsCount(); i++) {
             barsLocationY[i] = i * DESIRED_CELL_HEIGHT + timelineY + (int)(1.5 * DESIRED_CELL_HEIGHT);
             barsLocationRight[i] = barsLocationLeft + (unitWidth * adapter.getItemAtPosition(i).getValue());
+            barsLocationRightAnimated[i] = animateIntro ? 0 : barsLocationRight[i];
             barTextY[i] = barsLocationY[i] - (int)((_pBarsText.descent() + _pBarsText.ascent()) / 2);
+        }
+
+        // Should we animate?
+        if (animateIntro) {
+            introAnimation.start();
         }
     }
 
@@ -126,9 +140,18 @@ public class ChartView extends BaseView {
         // Read the colors
         int barsColor = a.getColor(R.styleable.ChartView_chart_bars_color, Color.WHITE);
         int timelineColor = a.getColor(R.styleable.ChartView_chart_timeline_color, Color.GRAY);
+        animateIntro = a.getBoolean(R.styleable.ChartView_chart_animate_intro, true);
 
         // Recycle the typed array
         a.recycle();
+
+        // Init the animation (if needed)
+        if (animateIntro) {
+            introAnimation = ValueAnimator.ofFloat(0f, 1f);
+            introAnimation.setDuration(1000);
+            introAnimation.setInterpolator(new BounceInterpolator());
+            introAnimation.addUpdateListener(this);
+        }
 
         // Init the paints
         _pBars = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -186,10 +209,10 @@ public class ChartView extends BaseView {
 
         // Draw the bars
         for (int i=0; i<adapter.getItemsCount(); i++) {
-            canvas.drawLine(barsLocationLeft, barsLocationY[i], barsLocationRight[i], barsLocationY[i], _pBars);
-            canvas.drawRect(barsLocationRight[i] - barCircleRadius, barsLocationY[i] - barCircleRadius, barsLocationRight[i] + barCircleRadius, barsLocationY[i] + barCircleRadius, _pBars);
+            canvas.drawLine(barsLocationLeft, barsLocationY[i], barsLocationRightAnimated[i], barsLocationY[i], _pBars);
+            canvas.drawRect(barsLocationRightAnimated[i] - barCircleRadius, barsLocationY[i] - barCircleRadius, barsLocationRightAnimated[i] + barCircleRadius, barsLocationY[i] + barCircleRadius, _pBars);
             // canvas.drawCircle(barsLocationRight[i], barsLocationY[i], barCircleRadius, _pBars);
-            canvas.drawText(adapter.getItemAtPosition(i).getTitle(), barsLocationRight[i] + 2 * barCircleRadius, barTextY[i], _pBarsText);
+            canvas.drawText(adapter.getItemAtPosition(i).getTitle(), barsLocationRightAnimated[i] + 2 * barCircleRadius, barTextY[i], _pBarsText);
         }
     }
 
@@ -218,5 +241,19 @@ public class ChartView extends BaseView {
         requestLayout();
         // Redraw
         invalidate();
+    }
+
+    //
+    // Animation callbacks
+    //
+    @Override
+    public void onAnimationUpdate(ValueAnimator animation) {
+        // Sanity check
+        if (adapter == null || adapter.isEmpty()) return;
+
+        for (int i=0; i<adapter.getItemsCount(); i++) {
+            barsLocationRightAnimated[i] = (int)((float) animation.getAnimatedValue() * barsLocationRight[i]);
+        }
+        postInvalidate();
     }
 }

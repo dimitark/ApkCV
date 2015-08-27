@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             app:chart_timeline_color="@color/grey_color"
-            app:chart_bars_color="@color/myname_text_color" />
+            app:chart_bars_color="@color/myname_text_color"
+            app:chart_animate_intro="true"/>
     </ScrollView>
 
     <!-- The color overlay. Must be last because it's the most top element -->
