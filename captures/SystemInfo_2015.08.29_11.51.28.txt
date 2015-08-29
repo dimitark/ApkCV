@@ -1,0 +1,44 @@
+TASK dime.android.apkcv id=10797
+  ACTIVITY dime.android.apkcv/.ui.activities.MainActivity 254db212 pid=11665
+    Local FragmentActivity f63076b State:
+      mCreated=truemResumed=false mStopped=true mReallyStopped=true
+      mLoadersStarted=false
+    Active Fragments in 319e9305:
+      #0: MainFragment{24fa5a81 #0 id=0xffffffff}
+        mFragmentId=#ffffffff mContainerId=#0 mTag=null
+        mState=2 mIndex=0 mWho=android:fragment:0 mBackStackNesting=0
+        mAdded=true mRemoving=false mResumed=false mFromLayout=true mInLayout=true
+        mHidden=false mDetached=false mMenuVisible=true mHasMenu=false
+        mRetainInstance=false mRetaining=false mUserVisibleHint=true
+        mFragmentManager=FragmentManager{319e9305 in MainActivity{f63076b}}
+        mActivity=dime.android.apkcv.ui.activities.MainActivity@f63076b
+        mSavedViewState={2131492968=android.view.AbsSavedState$1@6f20726, 2131492984=android.view.AbsSavedState$1@6f20726, 2131492985=android.view.AbsSavedState$1@6f20726}
+        mView=android.widget.RelativeLayout{209ecf67 V.E..... .......D 0,0-1080,1701}
+        mInnerView=android.widget.RelativeLayout{209ecf67 V.E..... .......D 0,0-1080,1701}
+        Child FragmentManager{1779e114 in MainFragment{24fa5a81}}:
+          FragmentManager misc state:
+            mActivity=dime.android.apkcv.ui.activities.MainActivity@f63076b
+            mContainer=android.support.v4.app.Fragment$1@af11dbd
+            mParent=MainFragment{24fa5a81 #0 id=0xffffffff}
+            mCurState=2 mStateSaved=true mDestroyed=false
+    Added Fragments:
+      #0: MainFragment{24fa5a81 #0 id=0xffffffff}
+    FragmentManager misc state:
+      mActivity=dime.android.apkcv.ui.activities.MainActivity@f63076b
+      mContainer=android.support.v4.app.FragmentActivity$2@1ce76fb2
+      mCurState=2 mStateSaved=true mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{283efb03 V.E..... ... 0,0-1080,1920}
+        android.widget.LinearLayout{3a9dfa80 V.E..... ... 0,0-1080,1776}
+          android.view.ViewStub{1696d8b9 G.E..... ... 0,0-0,0 #1020373}
+          android.widget.FrameLayout{2c58d4fe V.E..... ... 0,75-1080,1776}
+            android.support.v7.internal.widget.FitWindowsLinearLayout{2d2c445f V.E..... ... 0,0-1080,1701 #7f0c0052 app:id/action_bar_root}
+              android.support.v7.internal.widget.ViewStubCompat{39283eac G.E..... ... 0,0-0,0 #7f0c0053 app:id/action_mode_bar_stub}
+              android.support.v7.internal.widget.ContentFrameLayout{3e434775 V.E..... ... 0,0-1080,1701 #1020002 android:id/content}
+                android.widget.RelativeLayout{3be9430a V.E..... ... 0,0-1080,1701}
+                  android.widget.RelativeLayout{209ecf67 V.E..... ... 0,0-1080,1701}
+                    dime.android.apkcv.ui.views.buble.BubbleView{387ac77b V.ED.... ... 0,0-1080,1701 #7f0c0068 app:id/bubble_view}
+                    android.widget.RelativeLayout{39309998 V.E..... ... 0,0-1080,1701 #7f0c0078 app:id/loading_layout}
+                      dime.android.apkcv.ui.views.loading.LoadingView{c0de5f1 V.ED.... ... 435,792-645,908 #7f0c0079 app:id/loading_view}
+        android.view.View{276085d6 V.ED.... ... 0,0-1080,75 #102002f android:id/statusBarBackground}
+        android.view.View{6646057 V.ED.... ... 0,1776-1080,1920 #1020030 android:id/navigationBarBackground}

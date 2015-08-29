@@ -21,8 +21,11 @@ public class RestServices {
      * Default constructor
      */
     public RestServices() {
+
         // Create the REST services
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(BuildConfig.REST_URL).build();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(BuildConfig.REST_URL)
+                .build();
         // Create the services
         skillsService = restAdapter.create(SkillsService.class);
         bioService = restAdapter.create(BioService.class);

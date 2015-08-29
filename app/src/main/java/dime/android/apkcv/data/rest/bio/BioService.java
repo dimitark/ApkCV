@@ -1,5 +1,6 @@
 package dime.android.apkcv.data.rest.bio;
 
+import retrofit.Callback;
 import retrofit.http.GET;
 
 /**
@@ -9,8 +10,8 @@ public interface BioService {
     /**
      * Returns my BIO
      *
-     * @return
+     * @param bioCallback
      */
     @GET("/bio")
-    Bio getBio();
+    void getBio(Callback<Bio> bioCallback);
 }

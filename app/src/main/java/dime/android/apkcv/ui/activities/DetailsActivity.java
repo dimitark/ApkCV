@@ -2,24 +2,15 @@ package dime.android.apkcv.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 
-import java.util.List;
-
 import dime.android.apkcv.App;
 import dime.android.apkcv.R;
 import dime.android.apkcv.Utils;
-import dime.android.apkcv.data.rest.ResponseHandler;
-import dime.android.apkcv.data.rest.RestTask;
-import dime.android.apkcv.data.rest.RestTaskRunnable;
-import dime.android.apkcv.data.rest.skills.Skill;
-import dime.android.apkcv.data.skills.SkillsChartAdapter;
 import dime.android.apkcv.ui.views.buble.BubbleView;
-import dime.android.apkcv.ui.views.chart.ChartView;
 
 /**
  * Created by dime on 26/08/15.

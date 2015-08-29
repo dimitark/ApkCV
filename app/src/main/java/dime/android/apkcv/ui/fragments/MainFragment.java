@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,6 @@ import com.squareup.picasso.Target;
 
 import dime.android.apkcv.App;
 import dime.android.apkcv.R;
-import dime.android.apkcv.data.rest.ResponseHandler;
-import dime.android.apkcv.data.rest.RestTask;
-import dime.android.apkcv.data.rest.RestTaskRunnable;
 import dime.android.apkcv.data.rest.bio.Bio;
 import dime.android.apkcv.ui.activities.BaseActivity;
 import dime.android.apkcv.ui.activities.DetailsActivity;
@@ -24,6 +22,9 @@ import dime.android.apkcv.ui.views.buble.BubbleClickListener;
 import dime.android.apkcv.ui.views.buble.BubbleColorScheme;
 import dime.android.apkcv.ui.views.buble.BubbleView;
 import dime.android.apkcv.ui.views.loading.LoadingView;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by dime on 29/08/15.
@@ -47,21 +48,16 @@ public class MainFragment extends BaseFragment<App, BaseActivity> implements Bub
         public void onPrepareLoad(Drawable placeHolderDrawable) {}
     };
 
-    // The response handler that fetches the Bio data
-    private ResponseHandler bioHandler = new ResponseHandler<Bio>() {
+    // The Bio callback
+    private Callback<Bio> bioCallback = new Callback<Bio>() {
         @Override
-        public void success(Bio bio) {
+        public void success(Bio bio, Response response) {
             Picasso.with(baseActivity).load(bio.getImage()).into(mainImageTarget);
         }
-        @Override
-        public void error() {}
-    };
 
-    // The rest task runnable for the Bio data
-    private RestTaskRunnable restTaskRunnable = new RestTaskRunnable<Bio>() {
         @Override
-        public Bio run() {
-            return app.getRestServices().getBioService().getBio();
+        public void failure(RetrofitError error) {
+            // TODO Show error
         }
     };
 
@@ -91,7 +87,7 @@ public class MainFragment extends BaseFragment<App, BaseActivity> implements Bub
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Fetch the Bio data
-        new RestTask<>(bioHandler).execute(restTaskRunnable);
+        app.getRestServices().getBioService().getBio(bioCallback);
     }
 
     @Override
