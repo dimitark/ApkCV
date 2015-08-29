@@ -214,10 +214,8 @@ public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateL
         // Draw the bars
         for (int i=0; i<adapter.getItemsCount(); i++) {
             canvas.drawLine(barsLocationLeft, barsLocationY[i], barsLocationRightAnimated[i], barsLocationY[i], _pBars);
-//            canvas.drawRect(barsLocationRightAnimated[i] - barCircleRadius, barsLocationY[i] - barCircleRadius, barsLocationRightAnimated[i] + barCircleRadius, barsLocationY[i] + barCircleRadius, _pBars);
             canvas.drawCircle(barsLocationRightAnimated[i], barsLocationY[i], barCircleRadius, _pBars);
             canvas.drawText(adapter.getItemAtPosition(i).getTitle(), barsLocationRightAnimated[i] + 2 * barCircleRadius, barTextY[i], _pBarsText);
-//            canvas.drawLine(barsLocationRightAnimated[i], barsLocationY[i], barsLocationRightAnimated[i], 0, _pBars);
         }
     }
 

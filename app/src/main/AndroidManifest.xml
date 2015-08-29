@@ -11,14 +11,14 @@
         android:theme="@style/AppTheme">
 
         <!-- The main activity -->
-        <activity android:name=".ui.activities.MainActivity">
+        <activity android:name=".ui.activities.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!-- The details activity -->
-        <activity android:name=".ui.activities.DetailsActivity" />
+        <activity android:name=".ui.activities.DetailsActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -143,7 +143,7 @@ public class LoadingView extends BaseView implements ValueAnimator.AnimatorUpdat
 
         DESIRED_TEXT_SIZE_IN_SP = ViewUtils.spToPixels(getContext(), 8f);
         _pText = new Paint(Paint.ANTI_ALIAS_FLAG);
-        _pText.setTypeface(Typeface.MONOSPACE);
+        _pText.setTypeface(Typeface.DEFAULT_BOLD);
         _pText.setColor(textColor);
         _pText.setTextAlign(Paint.Align.CENTER);
         _pText.setStyle(Paint.Style.FILL);

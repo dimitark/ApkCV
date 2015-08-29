@@ -90,23 +90,23 @@ public class DetailsActivity extends BaseActivity<App> {
         // TODO Test
         toolbar.setTitle(getResources().getString(R.string.skills_title));
         toolbar.setSubtitle(getResources().getString(R.string.skills_subtitle));
-        final ChartView chartView = (ChartView) findViewById(R.id.chart);
-        new RestTask<>(new ResponseHandler<List<Skill>>() {
-            @Override
-            public void success(List<Skill> skills) {
-                chartView.setAdapter(new SkillsChartAdapter(skills, getResources().getString(R.string.years)));
-            }
-
-            @Override
-            public void error() {
-                // TODO Display error
-            }
-        }).execute(new RestTaskRunnable<List<Skill>>() {
-            @Override
-            public List<Skill> run() {
-                return app.getRestServices().getSkillsService().listSkills();
-            }
-        });
+//        final ChartView chartView = (ChartView) findViewById(R.id.chart);
+//        new RestTask<>(new ResponseHandler<List<Skill>>() {
+//            @Override
+//            public void success(List<Skill> skills) {
+//                chartView.setAdapter(new SkillsChartAdapter(skills, getResources().getString(R.string.years)));
+//            }
+//
+//            @Override
+//            public void error() {
+//                // TODO Display error
+//            }
+//        }).execute(new RestTaskRunnable<List<Skill>>() {
+//            @Override
+//            public List<Skill> run() {
+//                return app.getRestServices().getSkillsService().listSkills();
+//            }
+//        });
     }
 
     @Override

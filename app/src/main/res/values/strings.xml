@@ -2,7 +2,7 @@
     <string name="app_name">ApkCV</string>
     <string name="myname">{Dimitar Kotevski}</string>
     <string name="years">Years</string>
-    <string name="loading">Loading</string>
+    <string name="loading">Loading...</string>
     <string name="skills_title">Skills</string>
-    <string name="skills_subtitle">My skills, sorted by years of experience</string>
+    <string name="skills_subtitle">Sorted by years of experience</string>
 </resources>
