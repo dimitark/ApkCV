@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loading_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:visibility="gone">
+
+    <dime.android.apkcv.ui.views.loading.LoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:loading_first_color="@color/timeline_color"
+        app:loading_second_color="@color/projects_color"
+        app:loading_third_color="@color/skills_color"
+        app:loading_text_color="@color/myname_text_color"
+        app:loading_text="@string/loading" />
+
+</RelativeLayout>

@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <dime.android.apkcv.ui.views.buble.BubbleView
-        android:id="@+id/bubble_view"
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:background_color="?attr/colorPrimary"
-        app:text_color="@color/myname_text_color"
-        app:bubble_timeline_color="@color/timeline_color"
-        app:bubble_timeline_secondary_color="@color/timeline_dark_color"
-        app:bubble_projects_color="@color/projects_color"
-        app:bubble_projects_secondary_color="@color/projects_dark_color"
-        app:bubble_skills_color="@color/skills_color"
-        app:bubble_skills_secondary_color="@color/skills_dark_color"
-        app:text="@string/myname"/>
-
+        android:name="dime.android.apkcv.ui.fragments.MainFragment" />
 </RelativeLayout>

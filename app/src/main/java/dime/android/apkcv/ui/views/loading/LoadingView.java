@@ -182,6 +182,30 @@ public class LoadingView extends BaseView implements ValueAnimator.AnimatorUpdat
         postInvalidate();
     }
 
+    /**
+     * Sets the colors of this view
+     *
+     * @param first
+     * @param second
+     * @param third
+     * @param text
+     */
+    public void setColors(int first, int second, int third, int text) {
+        // The colors
+        colors = new int[3];
+        // Read the colors
+        colors[0] = first;
+        colors[1] = second;
+        colors[2] = third;
+        textColor = text;
+
+        // Set the paints
+        for (int i = 0; i < _paints.length; i++) {
+            _paints[i].setColor(colors[i]);
+        }
+        _pText.setColor(textColor);
+    }
+
     //
     // Animator callbacks
     //

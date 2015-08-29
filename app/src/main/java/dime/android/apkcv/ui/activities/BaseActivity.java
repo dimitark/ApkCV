@@ -17,7 +17,7 @@ public class BaseActivity<App> extends ActionBarActivity {
     protected App app;
 
     // The Window object. Not null only if the version is >= LOLLIPOP
-    protected Window window;
+    private Window window;
 
     // The color of the status bar
     protected int statusBarColor;
