@@ -3,12 +3,14 @@
     <color name="primary">#37474F</color>
     <color name="primary_dark">#263238</color>
     <color name="myname_text_color">#e2e2e2</color>
-    <color name="grey_color">#929292</color>
 
-    <color name="timeline_color">#C62828</color>
-    <color name="timeline_dark_color">#B71C1C</color>
-    <color name="projects_color">#558B2F</color>
-    <color name="projects_dark_color">#33691E</color>
-    <color name="skills_color">#1565C0</color>
-    <color name="skills_dark_color">#0D47A1</color>
+    <color name="timeline_color">#b73e3a</color>
+    <color name="timeline_dark_color">#993a36</color>
+    <color name="projects_color">#65a23f</color>
+    <color name="projects_dark_color">#538938</color>
+    <color name="skills_color">#3763a1</color>
+    <color name="skills_dark_color">#375795</color>
+    <color name="skills_title">#79000000</color>
+    <color name="skills_bars_color">#c9c9c9</color>
+    <color name="skills_timeline_color">#cfb42f</color>
 </resources>

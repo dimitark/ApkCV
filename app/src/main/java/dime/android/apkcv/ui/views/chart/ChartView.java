@@ -20,14 +20,14 @@ import dime.android.apkcv.ui.views.ViewUtils;
  */
 public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateListener {
     // The desired height of a single cell
-    private final int DESIRED_CELL_HEIGHT = ViewUtils.dipsToPixels(getContext(), 25f);
+    private final int DESIRED_CELL_HEIGHT = ViewUtils.dipsToPixels(getContext(), 23f);
     private final int TIMELINE_TEXT_HEIGHT = ViewUtils.dipsToPixels(getContext(), 20f);
     private final int TIMELINE_HIGH_BAR_HEIGHT = ViewUtils.dipsToPixels(getContext(), 10f);
     private final int TIMELINE_LOW_BAR_HEIGHT = ViewUtils.dipsToPixels(getContext(), 5f);
-    private final float TIMELINE_STROKE_WIDTH = 3f;
-    private final float TIMELINE_TEXT_SIZE_IN_SP = 30f;
+    private final float TIMELINE_STROKE_WIDTH = 5f;
     private final float BARS_STROKE_WIDTH = 5f;
-    private final float BARS_TEXT_SIZE_IN_SP = 30f;
+    private float BARS_TEXT_SIZE_IN_SP;
+    private float TIMELINE_TEXT_SIZE_IN_SP;
 
     // Should we animate the into?
     private boolean animateIntro;
@@ -115,12 +115,12 @@ public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateL
         barsLocationRightAnimated = new int[adapter.getItemsCount()];
         barTextY = new int[adapter.getItemsCount()];
         // The radius of the circle at the end of the bars
-        barCircleRadius = DESIRED_CELL_HEIGHT / 6;
+        barCircleRadius = DESIRED_CELL_HEIGHT / 8;
 
         // Loop through all of the items in the adapter, and calculate their specific dimensions
         for (int i=0; i<adapter.getItemsCount(); i++) {
             barsLocationY[i] = i * DESIRED_CELL_HEIGHT + timelineY + (int)(1.5 * DESIRED_CELL_HEIGHT);
-            barsLocationRight[i] = barsLocationLeft + (unitWidth * adapter.getItemAtPosition(i).getValue());
+            barsLocationRight[i] = getPaddingLeft() + (unitWidth * adapter.getItemAtPosition(i).getValue());
             barsLocationRightAnimated[i] = animateIntro ? 0 : barsLocationRight[i];
             barTextY[i] = barsLocationY[i] - (int)((_pBarsText.descent() + _pBarsText.ascent()) / 2);
         }
@@ -144,10 +144,14 @@ public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateL
         // Recycle the typed array
         a.recycle();
 
+        // Set the text sizes
+        TIMELINE_TEXT_SIZE_IN_SP = ViewUtils.spToPixels(getContext(), 10f);
+        BARS_TEXT_SIZE_IN_SP = ViewUtils.spToPixels(getContext(), 10f);
+
         // Init the animation (if needed)
         if (animateIntro) {
             introAnimation = ValueAnimator.ofFloat(0f, 1f);
-            introAnimation.setDuration(1000);
+            introAnimation.setDuration(1500);
             introAnimation.setInterpolator(new BounceInterpolator());
             introAnimation.addUpdateListener(this);
         }
@@ -162,20 +166,22 @@ public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateL
 
         _pBarsText = new Paint(Paint.ANTI_ALIAS_FLAG);
         _pBarsText.setStyle(Paint.Style.FILL);
-        _pBarsText.setTypeface(Typeface.MONOSPACE);
+        _pBarsText.setTypeface(Typeface.DEFAULT);
         _pBarsText.setTextAlign(Paint.Align.LEFT);
         _pBarsText.setTextSize(BARS_TEXT_SIZE_IN_SP);
         _pBarsText.setColor(barsColor);
 
         _pTimelineMain = new Paint(Paint.ANTI_ALIAS_FLAG);
         _pTimelineMain.setColor(timelineColor);
-        _pTimelineMain.setStyle(Paint.Style.STROKE);
+        _pTimelineMain.setStyle(Paint.Style.FILL_AND_STROKE);
         _pTimelineMain.setStrokeWidth(TIMELINE_STROKE_WIDTH);
+        _pTimelineMain.setStrokeJoin(Paint.Join.ROUND);
+        _pTimelineMain.setStrokeCap(Paint.Cap.ROUND);
 
         _pTimelineText = new Paint(Paint.ANTI_ALIAS_FLAG);
         _pTimelineText.setColor(timelineColor);
         _pTimelineText.setStyle(Paint.Style.FILL);
-        _pTimelineText.setTypeface(Typeface.MONOSPACE);
+        _pTimelineText.setTypeface(Typeface.DEFAULT);
         _pTimelineText.setTextAlign(Paint.Align.CENTER);
         _pTimelineText.setTextSize(TIMELINE_TEXT_SIZE_IN_SP);
     }
@@ -190,28 +196,28 @@ public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateL
         canvas.drawText(adapter.getXAxisTitle(), timelineTitleX, timelineTextY, _pTimelineText);
         for (int i = adapter.getMaxValue(); i > 0; i--) {
             // Calculate the X of the bar
-            float x = getPaddingLeft() + i*unitWidth + (TIMELINE_STROKE_WIDTH / 2);
+            float x = getPaddingLeft() + i*unitWidth;
 
             int barHalfHeight;
             if (((adapter.getMaxValue() - i) % timelineMod) == 0) {
-                // It's a HIGH bar
-                barHalfHeight = TIMELINE_HIGH_BAR_HEIGHT / 2;
                 // Draw the text
                 canvas.drawText(i + "", x, timelineTextY, _pTimelineText);
+                canvas.drawCircle(x, timelineY, barCircleRadius, _pTimelineMain);
             } else {
                 // It's a LOW bar
                 barHalfHeight = TIMELINE_LOW_BAR_HEIGHT / 2;
+                // Draw the bar
+                canvas.drawLine(x, timelineY - barHalfHeight, x, timelineY + barHalfHeight, _pTimelineMain);
             }
-            // Draw the bar
-            canvas.drawLine(x, timelineY - barHalfHeight, x, timelineY + barHalfHeight, _pTimelineMain);
         }
 
         // Draw the bars
         for (int i=0; i<adapter.getItemsCount(); i++) {
             canvas.drawLine(barsLocationLeft, barsLocationY[i], barsLocationRightAnimated[i], barsLocationY[i], _pBars);
-            canvas.drawRect(barsLocationRightAnimated[i] - barCircleRadius, barsLocationY[i] - barCircleRadius, barsLocationRightAnimated[i] + barCircleRadius, barsLocationY[i] + barCircleRadius, _pBars);
-            // canvas.drawCircle(barsLocationRight[i], barsLocationY[i], barCircleRadius, _pBars);
+//            canvas.drawRect(barsLocationRightAnimated[i] - barCircleRadius, barsLocationY[i] - barCircleRadius, barsLocationRightAnimated[i] + barCircleRadius, barsLocationY[i] + barCircleRadius, _pBars);
+            canvas.drawCircle(barsLocationRightAnimated[i], barsLocationY[i], barCircleRadius, _pBars);
             canvas.drawText(adapter.getItemAtPosition(i).getTitle(), barsLocationRightAnimated[i] + 2 * barCircleRadius, barTextY[i], _pBarsText);
+//            canvas.drawLine(barsLocationRightAnimated[i], barsLocationY[i], barsLocationRightAnimated[i], 0, _pBars);
         }
     }
 

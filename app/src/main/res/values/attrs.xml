@@ -16,4 +16,11 @@
         <attr name="chart_bars_color" format="reference|color" />
         <attr name="chart_animate_intro" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="LoadingView">
+        <attr name="loading_first_color" format="reference|color" />
+        <attr name="loading_second_color" format="reference|color" />
+        <attr name="loading_third_color" format="reference|color" />
+        <attr name="loading_text_color" format="reference|color" />
+        <attr name="loading_text" format="reference|string" />
+    </declare-styleable>
 </resources>

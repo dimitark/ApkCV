@@ -3,6 +3,7 @@ package dime.android.apkcv.ui.views;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.TypedValue;
 
 /**
  * Created by dime on 25/08/15.
@@ -123,5 +124,16 @@ public class ViewUtils {
     public static float pixelsToDips(Context context, int pixels) {
         float scale = context.getResources().getDisplayMetrics().density;
         return pixels / scale;
+    }
+
+    /**
+     * SPs to Pixels
+     *
+     * @param context
+     * @param sps
+     * @return
+     */
+    public static float spToPixels(Context context, float sps) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sps, context.getResources().getDisplayMetrics());
     }
 }

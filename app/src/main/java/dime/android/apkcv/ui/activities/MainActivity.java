@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity<App> implements BubbleClickListen
         }).execute(new RestTaskRunnable<Bio>() {
             @Override
             public Bio run() {
-                return app.getBioService().getBio();
+                return app.getRestServices().getBioService().getBio();
             }
         });
     }

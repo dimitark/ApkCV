@@ -83,11 +83,13 @@ public class DetailsActivity extends BaseActivity<App> {
         colorOverlay = findViewById(R.id.color_overlay);
 
         // Set the toolbar & colorOverlay backgrounds
-        root.setBackgroundColor(Utils.colorWithAlpha(100, primaryColor));
+        root.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(primaryColor);
         colorOverlay.setBackgroundColor(primaryColor);
 
         // TODO Test
+        toolbar.setTitle(getResources().getString(R.string.skills_title));
+        toolbar.setSubtitle(getResources().getString(R.string.skills_subtitle));
         final ChartView chartView = (ChartView) findViewById(R.id.chart);
         new RestTask<>(new ResponseHandler<List<Skill>>() {
             @Override
@@ -102,7 +104,7 @@ public class DetailsActivity extends BaseActivity<App> {
         }).execute(new RestTaskRunnable<List<Skill>>() {
             @Override
             public List<Skill> run() {
-                return app.getSkillsService().listSkills();
+                return app.getRestServices().getSkillsService().listSkills();
             }
         });
     }

@@ -33,6 +33,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:design:22.2.0'
 
     // Picasso - A powerful image downloading and caching library for Android
     // https://github.com/square/picasso
