@@ -10,6 +10,8 @@ import android.view.animation.ScaleAnimation;
 import dime.android.apkcv.App;
 import dime.android.apkcv.R;
 import dime.android.apkcv.Utils;
+import dime.android.apkcv.ui.fragments.BaseFragment;
+import dime.android.apkcv.ui.fragments.SkillsFragment;
 import dime.android.apkcv.ui.views.buble.BubbleView;
 
 /**
@@ -39,8 +41,6 @@ public class DetailsActivity extends BaseActivity<App> {
 
     // The root view/layout
     private View root;
-    // The toolbar
-    private Toolbar toolbar;
     // The color overlay
     private View colorOverlay;
 
@@ -52,7 +52,7 @@ public class DetailsActivity extends BaseActivity<App> {
         // Get the extras
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            BubbleView.BubbleButtonType.valueOf(extras.getString(EXTRA_TYPE_KEY));
+            type = BubbleView.BubbleButtonType.valueOf(extras.getString(EXTRA_TYPE_KEY));
             primaryColor = extras.getInt(EXTRA_PRIMARY_COLOR_KEY, Utils.getThemeColor(R.attr.colorPrimary, this));
             secondaryColor = extras.getInt(EXTRA_SECONDARY_COLOR_KEY, Utils.getThemeColor(R.attr.colorPrimaryDark, this));
             statusBarColor = secondaryColor;
@@ -78,26 +78,8 @@ public class DetailsActivity extends BaseActivity<App> {
         toolbar.setBackgroundColor(primaryColor);
         colorOverlay.setBackgroundColor(primaryColor);
 
-        // TODO Test
-        toolbar.setTitle(getResources().getString(R.string.skills_title));
-        toolbar.setSubtitle(getResources().getString(R.string.skills_subtitle));
-//        final ChartView chartView = (ChartView) findViewById(R.id.chart);
-//        new RestTask<>(new ResponseHandler<List<Skill>>() {
-//            @Override
-//            public void success(List<Skill> skills) {
-//                chartView.setAdapter(new SkillsChartAdapter(skills, getResources().getString(R.string.years)));
-//            }
-//
-//            @Override
-//            public void error() {
-//                // TODO Display error
-//            }
-//        }).execute(new RestTaskRunnable<List<Skill>>() {
-//            @Override
-//            public List<Skill> run() {
-//                return app.getRestServices().getSkillsService().listSkills();
-//            }
-//        });
+        // Setup the correct fragment
+        setupFragment();
     }
 
     @Override
@@ -145,5 +127,26 @@ public class DetailsActivity extends BaseActivity<App> {
 
         // Get the shouldAnimateColorOverlay
         shouldAnimateColorOverlay = savedInstanceState.getBoolean(SAVED_STATE_SHOULD_ANIMATE_COLOR_OVERLAY, true);
+    }
+
+    /**
+     * Set's up the correct fragment
+     */
+    private void setupFragment() {
+        // The fragment that need to be placed in the container
+        BaseFragment fragment;
+
+        switch (type) {
+            case SKILLS:
+                fragment = new SkillsFragment();
+                break;
+            default:
+                // Should not come to this!
+                fragment = new SkillsFragment();
+                break;
+        }
+
+        // Add the fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
     }
 }

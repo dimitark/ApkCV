@@ -17,43 +17,13 @@
         android:minHeight="?attr/actionBarSize"
         android:background="?attr/colorPrimary" />
 
-    <!-- TODO Test -->
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@id/toolbar"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:fillViewport="true">-->
-
-        <!--<RelativeLayout-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-            <!--<dime.android.apkcv.ui.views.chart.ChartView-->
-                <!--android:id="@+id/chart"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--app:chart_timeline_color="@color/skills_timeline_color"-->
-                <!--app:chart_bars_color="@color/skills_bars_color"-->
-                <!--app:chart_animate_intro="true"/>-->
-            <!-- -->
-            <!--<ImageView-->
-                <!--android:layout_width="120dp"-->
-                <!--android:layout_height="221dp"-->
-                <!--android:src="@mipmap/dime"-->
-                <!--android:alpha="0.75"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_alignParentRight="true"/>-->
-
-        <!--</RelativeLayout>-->
-    <!--</ScrollView>-->
-
-    <dime.android.apkcv.ui.views.loading.LoadingView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    app:loading_text="@string/loading" />
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar">
+    </LinearLayout>
 
     <!-- The color overlay. Must be last because it's the most top element -->
     <View

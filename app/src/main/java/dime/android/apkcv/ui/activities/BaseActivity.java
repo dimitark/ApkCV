@@ -3,6 +3,7 @@ package dime.android.apkcv.ui.activities;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -18,6 +19,9 @@ public class BaseActivity<App> extends ActionBarActivity {
 
     // The Window object. Not null only if the version is >= LOLLIPOP
     private Window window;
+
+    // The toolbar. Can be null
+    protected Toolbar toolbar;
 
     // The color of the status bar
     protected int statusBarColor;
@@ -50,5 +54,14 @@ public class BaseActivity<App> extends ActionBarActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(statusBarColor);
         }
+    }
+
+    /**
+     * Returns the toolbar. Can be null if the activity hasn't got any.
+     *
+     * @return
+     */
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

@@ -13,7 +13,6 @@ import retrofit.RestAdapter;
 public class RestServices {
     // The Skills Service
     private SkillsService skillsService;
-
     // The Bio Service
     private BioService bioService;
 
