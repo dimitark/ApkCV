@@ -17,6 +17,10 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
     // A reference to the parent BaseActivity
     protected BaseActivity baseActivity;
 
+    // The primary and secondary colors
+    protected int primaryColor = -1;
+    protected int secondaryColor = -1;
+
     // References to the loadingLayout and the loadingView
     private ViewGroup loadingLayout;
     private LoadingView loadingView;
@@ -54,8 +58,41 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
 
         // Let the fragment customize the loading view
         if (loadingLayout != null && loadingView != null) {
+            // Set the background color of the loading layout
+            // the same as the primary color of this fragment
+            if (primaryColor != -1) {
+                loadingLayout.setBackgroundColor(primaryColor);
+                // Check if a some of the loading colors is the same
+                // as the loading background, and change it if it is
+                int[] colors = loadingView.getColors();
+                int[] newColors = new int[colors.length];
+                boolean colorsChanges = false;
+                for (int i = 0; i < colors.length; i++) {
+                    if (colors[i] == primaryColor) {
+                        newColors[i] = secondaryColor;
+                        colorsChanges = true;
+                    } else {
+                        newColors[i] = colors[i];
+                    }
+                }
+                // Set the colors back
+                if (colorsChanges) {
+                    loadingView.setColors(newColors);
+                }
+            }
             customizeLoadingView(loadingLayout, loadingView);
         }
+    }
+
+    /**
+     * Sets the main colors of the fragment
+     *
+     * @param primaryColor
+     * @param secondaryColor
+     */
+    public void setColors(int primaryColor, int secondaryColor) {
+        this.primaryColor = primaryColor;
+        this.secondaryColor = secondaryColor;
     }
 
     /**

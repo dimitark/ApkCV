@@ -67,8 +67,6 @@ public class SkillsFragment extends BaseFragment<App, BaseActivity> {
 
     @Override
     protected void customizeLoadingView(ViewGroup loadingLayout, LoadingView loadingView) {
-        // TODO Change the colors of the loading view
-
         // Show the loading screen
         showLoadingScreen();
     }

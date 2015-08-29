@@ -10,8 +10,10 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.Animation;
 
+import dime.android.apkcv.App;
 import dime.android.apkcv.R;
 import dime.android.apkcv.ui.views.BaseView;
 import dime.android.apkcv.ui.views.ViewUtils;
@@ -185,25 +187,35 @@ public class LoadingView extends BaseView implements ValueAnimator.AnimatorUpdat
     /**
      * Sets the colors of this view
      *
-     * @param first
-     * @param second
-     * @param third
-     * @param text
+     * @param colors
      */
-    public void setColors(int first, int second, int third, int text) {
+    public void setColors(int[] colors) {
+        // Sanity check
+        if (colors.length != 3) {
+            Log.e(App.LOG_TAG, "Won't change the colors. Need to provide exactly 3 colors.");
+            return;
+        }
+
         // The colors
-        colors = new int[3];
+        this.colors = new int[3];
         // Read the colors
-        colors[0] = first;
-        colors[1] = second;
-        colors[2] = third;
-        textColor = text;
+        this.colors[0] = colors[0];
+        this.colors[1] = colors[1];
+        this.colors[2] = colors[2];
 
         // Set the paints
         for (int i = 0; i < _paints.length; i++) {
             _paints[i].setColor(colors[i]);
         }
-        _pText.setColor(textColor);
+    }
+
+    /**
+     * Returns the colors of this view
+     *
+     * @return
+     */
+    public int[] getColors() {
+        return colors;
     }
 
     //

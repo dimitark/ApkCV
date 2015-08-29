@@ -12,6 +12,7 @@ import dime.android.apkcv.R;
 import dime.android.apkcv.Utils;
 import dime.android.apkcv.ui.fragments.BaseFragment;
 import dime.android.apkcv.ui.fragments.SkillsFragment;
+import dime.android.apkcv.ui.fragments.TimelineFragment;
 import dime.android.apkcv.ui.views.buble.BubbleView;
 
 /**
@@ -137,6 +138,9 @@ public class DetailsActivity extends BaseActivity<App> {
         BaseFragment fragment;
 
         switch (type) {
+            case TIMELINE:
+                fragment = new TimelineFragment();
+                break;
             case SKILLS:
                 fragment = new SkillsFragment();
                 break;
@@ -145,7 +149,8 @@ public class DetailsActivity extends BaseActivity<App> {
                 fragment = new SkillsFragment();
                 break;
         }
-
+        // Setup the colors of the fragment
+        fragment.setColors(primaryColor, secondaryColor);
         // Add the fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
     }

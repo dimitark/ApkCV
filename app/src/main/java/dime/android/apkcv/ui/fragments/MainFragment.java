@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class MainFragment extends BaseFragment<App, BaseActivity> implements Bub
 
         @Override
         public void failure(RetrofitError error) {
+            Log.e(App.LOG_TAG, "Error while fetching the data!");
             // TODO Show error
         }
     };
