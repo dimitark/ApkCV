@@ -11,6 +11,7 @@ import dime.android.apkcv.App;
 import dime.android.apkcv.R;
 import dime.android.apkcv.Utils;
 import dime.android.apkcv.ui.fragments.BaseFragment;
+import dime.android.apkcv.ui.fragments.ProjectsFragment;
 import dime.android.apkcv.ui.fragments.SkillsFragment;
 import dime.android.apkcv.ui.fragments.TimelineFragment;
 import dime.android.apkcv.ui.views.buble.BubbleView;
@@ -140,6 +141,9 @@ public class DetailsActivity extends BaseActivity<App> {
         switch (type) {
             case TIMELINE:
                 fragment = new TimelineFragment();
+                break;
+            case PROJECTS:
+                fragment = new ProjectsFragment();
                 break;
             case SKILLS:
                 fragment = new SkillsFragment();

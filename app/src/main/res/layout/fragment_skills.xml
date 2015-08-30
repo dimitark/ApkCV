@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="221dp"
-                android:src="@mipmap/dime"
+                android:src="@drawable/dime"
                 android:alpha="0.75"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"/>
