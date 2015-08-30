@@ -2,6 +2,7 @@ package dime.android.apkcv.data.timeline;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -66,7 +67,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineLifeEventHolde
     public void onBindViewHolder(TimelineLifeEventHolder viewHolder, int position) {
         // Get the item
         TimelineItem item = items.get(position);
-        // BInd the data
+        // Check the year visibility
+        if (cellsWithYear.indexOf(position) != -1) {
+            viewHolder.year.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.year.setVisibility(View.INVISIBLE);
+        }
+
+        // Bind the data
+        viewHolder.year.setText(item.getYear() + "");
         viewHolder.info.setText(item.getInfo());
         viewHolder.desc.setText(item.getDesc());
     }

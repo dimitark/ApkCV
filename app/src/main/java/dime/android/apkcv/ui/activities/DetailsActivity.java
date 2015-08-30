@@ -20,6 +20,9 @@ import dime.android.apkcv.ui.views.buble.BubbleView;
  * Created by dime on 26/08/15.
  */
 public class DetailsActivity extends BaseActivity<App> {
+    // Default behaviour
+    private static final boolean ANIMATE_COLOR_OVERLAY_BY_DEFAULT = false;
+
     // The Extra key names
     public static final String EXTRA_TYPE_KEY = "type";
     public static final String EXTRA_PRIMARY_COLOR_KEY = "primaryColor";
@@ -65,10 +68,10 @@ public class DetailsActivity extends BaseActivity<App> {
             secondaryColor = Utils.getThemeColor(R.attr.colorPrimary, this);
         }
 
-        // I guess we should animate the colorOverlay
+        // Set the default behaviour
         // If we are being re-created, the onRestoreInstantState()
-        // will override this value
-        shouldAnimateColorOverlay = true;
+        // will override this value.
+        shouldAnimateColorOverlay = ANIMATE_COLOR_OVERLAY_BY_DEFAULT;
 
         // Get the UI components
         root = findViewById(android.R.id.content);
@@ -128,7 +131,7 @@ public class DetailsActivity extends BaseActivity<App> {
         super.onRestoreInstanceState(savedInstanceState);
 
         // Get the shouldAnimateColorOverlay
-        shouldAnimateColorOverlay = savedInstanceState.getBoolean(SAVED_STATE_SHOULD_ANIMATE_COLOR_OVERLAY, true);
+        shouldAnimateColorOverlay = savedInstanceState.getBoolean(SAVED_STATE_SHOULD_ANIMATE_COLOR_OVERLAY, ANIMATE_COLOR_OVERLAY_BY_DEFAULT);
     }
 
     /**

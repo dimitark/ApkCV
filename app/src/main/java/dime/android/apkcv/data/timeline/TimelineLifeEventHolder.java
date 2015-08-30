@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import dime.android.apkcv.R;
-import dime.android.apkcv.data.rest.timeline.TimelineItem;
 
 /**
  * Created by dime on 29/08/15.
@@ -14,6 +13,7 @@ public class TimelineLifeEventHolder extends RecyclerView.ViewHolder {
     // The UI components
     public final TextView info;
     public final TextView desc;
+    public final TextView year;
 
     /**
      * Default constructor
@@ -26,5 +26,6 @@ public class TimelineLifeEventHolder extends RecyclerView.ViewHolder {
         // Get the UI components
         info = (TextView) itemView.findViewById(R.id.timeline_info);
         desc = (TextView) itemView.findViewById(R.id.timeline_desc);
+        year = (TextView) itemView.findViewById(R.id.year_text);
     }
 }
