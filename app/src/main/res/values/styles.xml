@@ -10,7 +10,7 @@
     </style>
     <style name="ToolbarSubtitleStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/skills_bars_color</item>
+        <item name="android:textColor">@color/myname_text_color</item>
         <item name="android:textStyle">normal</item>
     </style>
 </resources>

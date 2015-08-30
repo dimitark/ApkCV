@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.viewpagerindicator.CirclePageIndicator
+    <dime.android.apkcv.ui.views.MyCirclePageIndicator
         android:id="@+id/page_indicator"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -29,12 +29,11 @@
     <dime.android.apkcv.ui.views.InsensitiveViewPager
         android:id="@+id/content_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="32dp"
         android:layout_alignLeft="@id/frame"
         android:layout_alignRight="@id/frame"
         android:layout_alignBottom="@id/frame"
         android:layout_alignTop="@id/frame"
-        android:layout_marginTop="35dp"
         android:padding="5dp" />
 
     <!-- Must be added last (ok, before the loading view) to intercept all touch events -->

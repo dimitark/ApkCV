@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.viewpagerindicator.CirclePageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.List;
 
@@ -18,6 +17,7 @@ import dime.android.apkcv.data.projects.ContentAdapter;
 import dime.android.apkcv.data.projects.EmptySpaceAdapter;
 import dime.android.apkcv.data.rest.projects.Project;
 import dime.android.apkcv.ui.activities.BaseActivity;
+import dime.android.apkcv.ui.views.MyCirclePageIndicator;
 import dime.android.apkcv.ui.views.loading.LoadingView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -26,11 +26,11 @@ import retrofit.client.Response;
 /**
  * Created by dime on 30/08/15.
  */
-public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
+public class ProjectsFragment extends BaseFragment<App, BaseActivity> implements ViewPager.OnPageChangeListener {
     // The UI components
     private ViewPager parentViewPager;
     private ViewPager contentViewPager;
-    private CirclePageIndicator pageIndicator;
+    private MyCirclePageIndicator pageIndicator;
 
     // The data callback
     private Callback<List<Project>> callback = new Callback<List<Project>>() {
@@ -64,7 +64,10 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
         // Get the UI components
         parentViewPager = (ViewPager) rootLayout.findViewById(R.id.parent_view_pager);
         contentViewPager = (ViewPager) rootLayout.findViewById(R.id.content_view_pager);
-        pageIndicator = (CirclePageIndicator) rootLayout.findViewById(R.id.page_indicator);
+        pageIndicator = (MyCirclePageIndicator) rootLayout.findViewById(R.id.page_indicator);
+
+        // Setup the scroll magic
+        pageIndicator.setAdditionalOnPageChangeListener(this);
 
         // Call the super
         postOnCreateView(rootLayout);
@@ -88,4 +91,22 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
         // Show the loading screen
         showLoadingScreen();
     }
+
+    //
+    // OnPageChangeListener
+    //
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        // Scroll the content view pager
+        contentViewPager.scrollBy(5, 0);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        // Change the page on the content view pager
+        contentViewPager.setCurrentItem(position, true);
+    }
+    @Override
+    public void onPageScrollStateChanged(int state) {}
 }
