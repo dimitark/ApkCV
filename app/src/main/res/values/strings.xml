@@ -5,6 +5,8 @@
     <string name="loading">Loading...</string>
     <string name="timeline_title">Timeline</string>
     <string name="timeline_subtitle">A short glimpse into my life</string>
+    <string name="projects_title">Projects</string>
+    <string name="projects_subtitle">List of projects I\'ve worked on</string>
     <string name="skills_title">Skills</string>
     <string name="skills_subtitle">Sorted by years of experience</string>
 </resources>

@@ -4,6 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/parent_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/osx_frame"/>
+
+    <dime.android.apkcv.ui.views.InsensitiveViewPager
+        android:id="@+id/content_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@id/frame"
+        android:layout_alignRight="@id/frame"
+        android:layout_alignBottom="@id/frame"
+        android:layout_alignTop="@id/frame"
+        android:padding="5dp" />
+
     <!-- The loading view -->
     <include layout="@layout/view_loading" />
 </RelativeLayout>
