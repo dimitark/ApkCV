@@ -7,9 +7,9 @@ Feel free to use any part of it [except my personal data].
 License
 =======
 
-    The MIT License
+    The MIT License (MIT)
 
-    Copyright (c) 2010-2015 Google, Inc. http://angularjs.org
+    Copyright (c) 2015, Dimitar Kotevski
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
