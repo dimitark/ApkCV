@@ -1,9 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        releaseconfig {
+            keyAlias 'dimeandroid'
+            storeFile file('../../android-release-key.keystore')
+        }
+    }
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
-
     defaultConfig {
         applicationId "dime.android.apkcv"
         minSdkVersion 19
@@ -15,17 +20,16 @@ android {
         debug {
             debuggable true
             minifyEnabled false
-
             // Constants
             buildConfigField "String", "REST_URL", "\"http://ec2-52-3-16-181.compute-1.amazonaws.com:8080/\""
         }
         release {
             debuggable false
-            minifyEnabled true
-
+            minifyEnabled false
             // Constants
             buildConfigField "String", "REST_URL", "\"http://ec2-52-3-16-181.compute-1.amazonaws.com:8080/\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseconfig
         }
     }
 }
