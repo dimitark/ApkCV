@@ -26,7 +26,7 @@
         android:background="@drawable/osx_frame"
         android:layout_above="@id/page_indicator" />
 
-    <dime.android.apkcv.ui.views.InsensitiveViewPager
+    <android.support.v4.view.ViewPager
         android:id="@+id/content_view_pager"
         android:layout_width="match_parent"
         android:layout_height="32dp"
@@ -34,13 +34,8 @@
         android:layout_alignRight="@id/frame"
         android:layout_alignBottom="@id/frame"
         android:layout_alignTop="@id/frame"
-        android:padding="5dp" />
-
-    <!-- Must be added last (ok, before the loading view) to intercept all touch events -->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/parent_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:padding="5dp"
+        android:overScrollMode="never"/>
 
     <!-- The loading view -->
     <include layout="@layout/view_loading" />

@@ -7,14 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.viewpagerindicator.CirclePageIndicator;
-
 import java.util.List;
 
 import dime.android.apkcv.App;
 import dime.android.apkcv.R;
 import dime.android.apkcv.data.projects.ContentAdapter;
-import dime.android.apkcv.data.projects.EmptySpaceAdapter;
 import dime.android.apkcv.data.rest.projects.Project;
 import dime.android.apkcv.ui.activities.BaseActivity;
 import dime.android.apkcv.ui.views.MyCirclePageIndicator;
@@ -26,9 +23,8 @@ import retrofit.client.Response;
 /**
  * Created by dime on 30/08/15.
  */
-public class ProjectsFragment extends BaseFragment<App, BaseActivity> implements ViewPager.OnPageChangeListener {
+public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
     // The UI components
-    private ViewPager parentViewPager;
     private ViewPager contentViewPager;
     private MyCirclePageIndicator pageIndicator;
 
@@ -37,11 +33,10 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> implements
         @Override
         public void success(List<Project> projects, Response response) {
             // Set the adapters
-            parentViewPager.setAdapter(new EmptySpaceAdapter(baseActivity.getSupportFragmentManager(), projects.size()));
             contentViewPager.setAdapter(new ContentAdapter(baseActivity.getSupportFragmentManager(), projects));
 
             // Setup the page indicator
-            pageIndicator.setViewPager(parentViewPager);
+            pageIndicator.setViewPager(contentViewPager);
 
             // Hide the loading view
             hideLoadingScreen();
@@ -62,12 +57,8 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> implements
         ViewGroup rootLayout = (ViewGroup) inflater.inflate(R.layout.fragment_projects, container, false);
 
         // Get the UI components
-        parentViewPager = (ViewPager) rootLayout.findViewById(R.id.parent_view_pager);
         contentViewPager = (ViewPager) rootLayout.findViewById(R.id.content_view_pager);
         pageIndicator = (MyCirclePageIndicator) rootLayout.findViewById(R.id.page_indicator);
-
-        // Setup the scroll magic
-        pageIndicator.setAdditionalOnPageChangeListener(this);
 
         // Call the super
         postOnCreateView(rootLayout);
@@ -91,22 +82,4 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> implements
         // Show the loading screen
         showLoadingScreen();
     }
-
-    //
-    // OnPageChangeListener
-    //
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        // Scroll the content view pager
-        contentViewPager.scrollBy(5, 0);
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        // Change the page on the content view pager
-        contentViewPager.setCurrentItem(position, true);
-    }
-    @Override
-    public void onPageScrollStateChanged(int state) {}
 }
