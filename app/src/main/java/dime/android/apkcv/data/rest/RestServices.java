@@ -2,6 +2,7 @@ package dime.android.apkcv.data.rest;
 
 import dime.android.apkcv.BuildConfig;
 import dime.android.apkcv.data.rest.bio.BioService;
+import dime.android.apkcv.data.rest.projects.ProjectsService;
 import dime.android.apkcv.data.rest.skills.SkillsService;
 import dime.android.apkcv.data.rest.timeline.TimelineService;
 import retrofit.RestAdapter;
@@ -18,6 +19,8 @@ public class RestServices {
     private BioService bioService;
     // The Timeline service
     private TimelineService timelineService;
+    // The projects service
+    private ProjectsService projectsService;
 
     /**
      * Default constructor
@@ -32,6 +35,7 @@ public class RestServices {
         skillsService = restAdapter.create(SkillsService.class);
         bioService = restAdapter.create(BioService.class);
         timelineService = restAdapter.create(TimelineService.class);
+        projectsService = restAdapter.create(ProjectsService.class);
     }
 
     /**
@@ -58,5 +62,14 @@ public class RestServices {
      */
     public TimelineService getTimelineService() {
         return timelineService;
+    }
+
+    /**
+     * Returns the projects service
+     *
+     * @return
+     */
+    public ProjectsService getProjectsService() {
+        return projectsService;
     }
 }
