@@ -9,6 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/page_indicator"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
     <View
         android:id="@+id/frame"
         android:layout_width="match_parent"
@@ -17,7 +25,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/osx_frame"/>
+        android:background="@drawable/osx_frame"
+        android:layout_above="@id/page_indicator" />
 
     <dime.android.apkcv.ui.views.InsensitiveViewPager
         android:id="@+id/content_view_pager"

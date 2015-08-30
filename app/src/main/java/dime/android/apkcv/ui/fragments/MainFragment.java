@@ -57,8 +57,10 @@ public class MainFragment extends BaseFragment<App, BaseActivity> implements Bub
 
         @Override
         public void failure(RetrofitError error) {
-            Log.e(App.LOG_TAG, "Error while fetching the data!");
-            // TODO Show error
+            // Write to the log
+            Log.e(App.LOG_TAG, error.getMessage());
+            // Show the error screen
+            showErrorScreen();
         }
     };
 

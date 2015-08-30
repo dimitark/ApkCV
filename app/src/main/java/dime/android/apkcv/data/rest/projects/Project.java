@@ -11,7 +11,7 @@ public class Project {
     // Description
     private String desc;
     // The position
-    private ProjectPosition position;
+    private List<ProjectPosition> positions;
     // The platforms
     private List<ProjectPlatform> platforms;
 
@@ -31,12 +31,12 @@ public class Project {
         this.desc = desc;
     }
 
-    public ProjectPosition getPosition() {
-        return position;
+    public List<ProjectPosition> getPosition() {
+        return positions;
     }
 
-    public void setPosition(ProjectPosition position) {
-        this.position = position;
+    public void setPosition(List<ProjectPosition> positions) {
+        this.positions = positions;
     }
 
     public List<ProjectPlatform> getPlatforms() {

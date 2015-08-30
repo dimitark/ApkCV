@@ -2,6 +2,7 @@ package dime.android.apkcv.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,10 @@ public class SkillsFragment extends BaseFragment<App, BaseActivity> {
         }
         @Override
         public void failure(RetrofitError error) {
-            // TODO Display error
+            // Write to the log
+            Log.e(App.LOG_TAG, error.getMessage());
+            // Show the error screen
+            showErrorScreen();
         }
     };
 

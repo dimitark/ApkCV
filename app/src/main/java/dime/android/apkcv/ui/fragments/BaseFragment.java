@@ -24,6 +24,7 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
     // References to the loadingLayout and the loadingView
     private ViewGroup loadingLayout;
     private LoadingView loadingView;
+    private View errorText;
 
     /**
      * Called from the postOnCreateView. This method should setup the loading view (e.g. colors).
@@ -55,6 +56,7 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
         // Get the loading layout
         loadingLayout = (ViewGroup) rootLayout.findViewById(R.id.loading_layout);
         loadingView = (LoadingView) rootLayout.findViewById(R.id.loading_view);
+        errorText = rootLayout.findViewById(R.id.error_text);
 
         // Let the fragment customize the loading view
         if (loadingLayout != null && loadingView != null) {
@@ -93,6 +95,17 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
     public void setColors(int primaryColor, int secondaryColor) {
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
+    }
+
+    /**
+     * Shows the error screen
+     */
+    protected void showErrorScreen() {
+        if (loadingLayout != null) {
+            loadingLayout.setVisibility(View.VISIBLE);
+            loadingView.setVisibility(View.GONE);
+            errorText.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

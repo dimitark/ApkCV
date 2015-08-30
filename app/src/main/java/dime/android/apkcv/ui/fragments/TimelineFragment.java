@@ -3,6 +3,7 @@ package dime.android.apkcv.ui.fragments;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,10 @@ public class TimelineFragment extends BaseFragment<App, BaseActivity> {
         }
         @Override
         public void failure(RetrofitError error) {
-            // TODO
+            // Write to the log
+            Log.e(App.LOG_TAG, error.getMessage());
+            // Show the error screen
+            showErrorScreen();
         }
     };
 
