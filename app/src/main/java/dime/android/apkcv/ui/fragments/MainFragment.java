@@ -52,6 +52,8 @@ public class MainFragment extends BaseFragment<App, BaseActivity> implements Bub
     private Callback<Bio> bioCallback = new Callback<Bio>() {
         @Override
         public void success(Bio bio, Response response) {
+            bubbleView.setTitle(String.format("{%s}", bio.getTitle()));
+            bubbleView.setEducation(String.format("{%s}", bio.getEdu()));
             Picasso.with(baseActivity).load(bio.getImage()).into(mainImageTarget);
         }
 

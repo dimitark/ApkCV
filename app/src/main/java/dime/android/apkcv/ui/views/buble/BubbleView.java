@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dime.android.apkcv.R;
+import dime.android.apkcv.Utils;
 import dime.android.apkcv.ui.views.BaseView;
 import dime.android.apkcv.ui.views.ViewUtils;
 
@@ -35,6 +36,7 @@ public class BubbleView extends BaseView implements ViewAnimationListener, View.
     // The paints
     private Paint _pBackground;
     private Paint _pText;
+    private Paint _pSubtext;
 
     // The main image bubble
     private ImageBubble imageBubble;
@@ -46,11 +48,18 @@ public class BubbleView extends BaseView implements ViewAnimationListener, View.
     // The data
     // The text
     private String mainText;
+    // The title
+    private String title;
+    // The education
+    private String education;
 
     // The dimensions
     // The text
     private int textX;
     private int textY;
+    // The subtext
+    private int titleY;
+    private int educationY;
 
     // The object interested in my clicks
     private BubbleClickListener bubbleClickListener;
@@ -100,6 +109,11 @@ public class BubbleView extends BaseView implements ViewAnimationListener, View.
         if (mainText == null) {
             mainText = "";
         }
+        title = "";
+        education = "";
+
+        // Get the colors
+        int textColor = a.getColor(R.styleable.BubbleView_text_color, Color.WHITE);
 
         //
         // Init the paints
@@ -110,10 +124,16 @@ public class BubbleView extends BaseView implements ViewAnimationListener, View.
         _pBackground.setStyle(Paint.Style.FILL);
         // The text paint
         _pText = new Paint(Paint.ANTI_ALIAS_FLAG);
-        _pText.setColor(a.getColor(R.styleable.BubbleView_text_color, Color.WHITE));
+        _pText.setColor(textColor);
         _pText.setTextAlign(Paint.Align.CENTER);
         _pText.setStyle(Paint.Style.FILL);
         _pText.setTypeface(Typeface.MONOSPACE);
+        // The subtext paint
+        _pSubtext = new Paint(Paint.ANTI_ALIAS_FLAG);
+        _pSubtext.setColor(Utils.colorWithAlpha(100, textColor));
+        _pSubtext.setTextAlign(Paint.Align.CENTER);
+        _pSubtext.setStyle(Paint.Style.FILL);
+        _pSubtext.setTypeface(Typeface.MONOSPACE);
 
         // Init the bubbles
         imageBubble = new ImageBubble();
@@ -150,6 +170,28 @@ public class BubbleView extends BaseView implements ViewAnimationListener, View.
     }
 
     /**
+     * Sets the title
+     *
+     * @param title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+        requestLayout();
+        invalidate();
+    }
+
+    /**
+     * Sets the education
+     *
+     * @param education
+     */
+    public void setEducation(String education) {
+        this.education = education;
+        requestLayout();
+        invalidate();
+    }
+
+    /**
      * Sets the bubble click listener
      *
      * @param bubbleClickListener
@@ -182,20 +224,38 @@ public class BubbleView extends BaseView implements ViewAnimationListener, View.
     protected void calculateDimensions() {
         // The image bubble
         int bubbleX = getPaddingLeft() + widthP / 2;
-        int bubbleY = getPaddingTop() + heightP / 2 - heightP / 5;
+        int bubbleY = getPaddingTop() + heightP / 2 - heightP / 4;
         int bubbleRadius = widthP / 4;
         imageBubble.setDimensions(bubbleX, bubbleY, bubbleRadius);
         // The text
         textX = bubbleX;
         textY = bubbleY + (int) (1.5 * bubbleRadius);
         ViewUtils.adjustTextSizeForWidth(mainText, _pText, (int)(widthP / 1.5));
+
+        // The subtext
+        // The desired size is 70% of the main text size
+        float desiredSize = _pText.getTextSize() * 0.7f;
+        // Get the size of the title
+        ViewUtils.adjustTextSizeForWidth(title, _pSubtext, (int)(widthP / 1.5));
+        // Get the MIN
+        desiredSize = Math.min(desiredSize, _pSubtext.getTextSize());
+        // Do the same for the education text
+        ViewUtils.adjustTextSizeForWidth(education, _pSubtext, (int)(widthP / 1.5));
+        // Get the MIN ans set it to the paint
+        _pSubtext.setTextSize(Math.min(desiredSize, _pSubtext.getTextSize()));
+        // Get the main line's height
+        int mainTextHeight = (int) (_pText.descent() - _pText.ascent());
+        // Calculate the Y for the subtext lines
+        titleY = textY + mainTextHeight;
+        educationY = titleY + mainTextHeight;
+
         // The color bubbles
         int colorBubblesRadius = bubbleRadius / 3;
-        int colorBubblesY = textY + 3*colorBubblesRadius;
-        int ySpacing = (widthP - 6*colorBubblesRadius) / 3;
-        colorBubbles.get(BubbleButtonType.TIMELINE).setDimensions(ySpacing, colorBubblesY, colorBubblesRadius, widthP, heightP);
-        colorBubbles.get(BubbleButtonType.PROJECTS).setDimensions(2*ySpacing + 2*colorBubblesRadius, colorBubblesY, colorBubblesRadius, widthP, heightP);
-        colorBubbles.get(BubbleButtonType.SKILLS).setDimensions(3*ySpacing + 4*colorBubblesRadius, colorBubblesY, colorBubblesRadius, widthP, heightP);
+        int colorBubblesY = educationY + 3*colorBubblesRadius;
+        int xSpacing = (widthP - 6*colorBubblesRadius) / 3;
+        colorBubbles.get(BubbleButtonType.TIMELINE).setDimensions(xSpacing, colorBubblesY, colorBubblesRadius, widthP, heightP);
+        colorBubbles.get(BubbleButtonType.PROJECTS).setDimensions(2*xSpacing + 2*colorBubblesRadius, colorBubblesY, colorBubblesRadius, widthP, heightP);
+        colorBubbles.get(BubbleButtonType.SKILLS).setDimensions(3*xSpacing + 4*colorBubblesRadius, colorBubblesY, colorBubblesRadius, widthP, heightP);
     }
 
     /**
@@ -211,6 +271,8 @@ public class BubbleView extends BaseView implements ViewAnimationListener, View.
         imageBubble.draw(canvas);
         // The text
         canvas.drawText(mainText, textX, textY, _pText);
+        canvas.drawText(title, textX, titleY, _pSubtext);
+        canvas.drawText(education, textX, educationY, _pSubtext);
         // The color bubbles
         for (ColorBubble cb : colorBubbles.values()) {
             // If we have a expanding bubble - don't draw it at all.

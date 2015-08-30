@@ -5,19 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <dime.android.apkcv.ui.views.buble.BubbleView
-        android:id="@+id/bubble_view"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:background_color="?attr/colorPrimary"
-        app:text_color="@color/myname_text_color"
-        app:bubble_timeline_color="@color/timeline_color"
-        app:bubble_timeline_secondary_color="@color/timeline_dark_color"
-        app:bubble_projects_color="@color/projects_color"
-        app:bubble_projects_secondary_color="@color/projects_dark_color"
-        app:bubble_skills_color="@color/skills_color"
-        app:bubble_skills_secondary_color="@color/skills_dark_color"
-        app:text="@string/myname"/>
+        android:fillViewport="true">
+
+        <dime.android.apkcv.ui.views.buble.BubbleView
+            android:id="@+id/bubble_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:background_color="?attr/colorPrimary"
+            app:text_color="@color/myname_text_color"
+            app:bubble_timeline_color="@color/timeline_color"
+            app:bubble_timeline_secondary_color="@color/timeline_dark_color"
+            app:bubble_projects_color="@color/projects_color"
+            app:bubble_projects_secondary_color="@color/projects_dark_color"
+            app:bubble_skills_color="@color/skills_color"
+            app:bubble_skills_secondary_color="@color/skills_dark_color"
+            app:text="@string/myname"/>
+    </ScrollView>
 
     <!-- The loading view -->
     <include layout="@layout/view_loading" />
