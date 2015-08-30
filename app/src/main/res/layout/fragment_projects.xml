@@ -4,11 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/parent_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/page_indicator"
         android:layout_height="wrap_content"
@@ -39,7 +34,14 @@
         android:layout_alignRight="@id/frame"
         android:layout_alignBottom="@id/frame"
         android:layout_alignTop="@id/frame"
+        android:layout_marginTop="35dp"
         android:padding="5dp" />
+
+    <!-- Must be added last (ok, before the loading view) to intercept all touch events -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/parent_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <!-- The loading view -->
     <include layout="@layout/view_loading" />

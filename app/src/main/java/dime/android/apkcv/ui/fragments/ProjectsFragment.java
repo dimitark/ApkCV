@@ -14,6 +14,7 @@ import java.util.List;
 
 import dime.android.apkcv.App;
 import dime.android.apkcv.R;
+import dime.android.apkcv.data.projects.ContentAdapter;
 import dime.android.apkcv.data.projects.EmptySpaceAdapter;
 import dime.android.apkcv.data.rest.projects.Project;
 import dime.android.apkcv.ui.activities.BaseActivity;
@@ -37,6 +38,7 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
         public void success(List<Project> projects, Response response) {
             // Set the adapters
             parentViewPager.setAdapter(new EmptySpaceAdapter(baseActivity.getSupportFragmentManager(), projects.size()));
+            contentViewPager.setAdapter(new ContentAdapter(baseActivity.getSupportFragmentManager(), projects));
 
             // Setup the page indicator
             pageIndicator.setViewPager(parentViewPager);
