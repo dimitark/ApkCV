@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
     // The UI components
     private ViewPager parentViewPager;
     private ViewPager contentViewPager;
-    private TitlePageIndicator pageIndicator;
+    private CirclePageIndicator pageIndicator;
 
     // The data callback
     private Callback<List<Project>> callback = new Callback<List<Project>>() {
@@ -61,7 +62,7 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
         // Get the UI components
         parentViewPager = (ViewPager) rootLayout.findViewById(R.id.parent_view_pager);
         contentViewPager = (ViewPager) rootLayout.findViewById(R.id.content_view_pager);
-        pageIndicator = (TitlePageIndicator) rootLayout.findViewById(R.id.page_indicator);
+        pageIndicator = (CirclePageIndicator) rootLayout.findViewById(R.id.page_indicator);
 
         // Call the super
         postOnCreateView(rootLayout);
