@@ -12,8 +12,8 @@ import dime.android.apkcv.data.rest.timeline.TimelineItem;
  */
 public class TimelineLifeEventHolder extends RecyclerView.ViewHolder {
     // The UI components
-    private TextView info;
-    private TextView desc;
+    public final TextView info;
+    public final TextView desc;
 
     /**
      * Default constructor
@@ -26,15 +26,5 @@ public class TimelineLifeEventHolder extends RecyclerView.ViewHolder {
         // Get the UI components
         info = (TextView) itemView.findViewById(R.id.timeline_info);
         desc = (TextView) itemView.findViewById(R.id.timeline_desc);
-    }
-
-    /**
-     * Binds the data
-     *
-     * @param item
-     */
-    public void bindData(TimelineItem item) {
-        info.setText(item.getInfo());
-        desc.setText(item.getDesc());
     }
 }

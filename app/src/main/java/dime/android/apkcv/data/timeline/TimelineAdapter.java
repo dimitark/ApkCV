@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -16,85 +17,62 @@ import dime.android.apkcv.data.rest.timeline.TimelineItem;
 /**
  * Created by dime on 29/08/15.
  */
-public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    // The years [position : year]
-    private Map<Integer, Integer> years = new HashMap<>();
-    // The actual items [position : item]
-    private Map<Integer, TimelineItem> items = new HashMap<>();
-    // The total number of rows
-    private int count = 0;
+public class TimelineAdapter extends RecyclerView.Adapter<TimelineLifeEventHolder> {
+    // The data (already sorted)
+    private List<TimelineItem> items;
+    // A list of indexes of the cells that need to display the year
+    private List<Integer> cellsWithYear = new ArrayList<>();
 
     /**
      * Default constructor
      *
-     * @param data
+     * @param items
      */
-    public TimelineAdapter(List<TimelineItem> data) {
+    public TimelineAdapter(List<TimelineItem> items) {
+        // Save the data
+        this.items = items;
+
         // Sort it descending by year
-        Collections.sort(data, new Comparator<TimelineItem>() {
+        Collections.sort(this.items, new Comparator<TimelineItem>() {
             @Override
             public int compare(TimelineItem lhs, TimelineItem rhs) {
                 return rhs.getYear() - lhs.getYear();
             }
         });
 
-        // Calculate the positions
-        // The year that was added last in the years map
-        int lastAddedYear = -1;
-        // The position index that needs to be added
-        int position = 0;
-        for (TimelineItem item : data) {
-            // Check if we already have the year
-            if (item.getYear() != lastAddedYear) {
-                years.put(position++, item.getYear());
-                lastAddedYear = item.getYear();
-                count++;
+        // See which cells need to display the year
+        int lastYear = -1;
+        for (int i = 0; i < this.items.size(); i++) {
+            if (lastYear != this.items.get(i).getYear()) {
+                lastYear = this.items.get(i).getYear();
+                cellsWithYear.add(i);
             }
-            // Add the item
-            items.put(position++, item);
-            count++;
         }
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TimelineLifeEventHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // The layout inflater
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         // The view holder that is being created
-        RecyclerView.ViewHolder viewHolder;
-
-        // Create the cells
-        if (viewType == TimelineCellType.YEAR.ordinal()) {
-            // Create the YEAR cell
-            viewHolder = new TimelineYearHolder(inflater.inflate(R.layout.cell_timeline_year, parent, false));
-        } else {
-            // Create the LIFE EVENT cell
-            viewHolder = new TimelineLifeEventHolder(inflater.inflate(R.layout.cell_timeline_life_event, parent, false));
-        }
+        TimelineLifeEventHolder viewHolder = new TimelineLifeEventHolder(inflater.inflate(R.layout.cell_timeline_life_event, parent, false));;
 
         // Return the view holder
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        if (viewHolder instanceof TimelineYearHolder) {
-            // Bind the data in the years cell
-            ((TimelineYearHolder) viewHolder).bindData(years.get(position));
-        } else {
-            // Bind the data in the life event cell
-            ((TimelineLifeEventHolder) viewHolder).bindData(items.get(position));
-        }
+    public void onBindViewHolder(TimelineLifeEventHolder viewHolder, int position) {
+        // Get the item
+        TimelineItem item = items.get(position);
+        // BInd the data
+        viewHolder.info.setText(item.getInfo());
+        viewHolder.desc.setText(item.getDesc());
     }
 
     @Override
     public int getItemCount() {
-        return count;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return years.containsKey(position) ? TimelineCellType.YEAR.ordinal() : TimelineCellType.LIFE_EVENT.ordinal();
+        return items.size();
     }
 }
