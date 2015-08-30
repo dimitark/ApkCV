@@ -37,6 +37,12 @@ public abstract class BaseView extends View {
     //
     protected int heightP;
 
+    //
+    // If set to true, the height will be the same
+    // as the calculated width IF the height is set to Wrap Content
+    //
+    protected boolean forceSquare;
+
     /**
      * This methods needs to calculate the dimensions for it's children
      */
@@ -99,6 +105,10 @@ public abstract class BaseView extends View {
             width = Math.min(desiredWidth, widthSize);
         } else {
             width = desiredWidth;
+        }
+
+        if (forceSquare) {
+            desiredHeight = width;
         }
 
         /* Measure the height */
