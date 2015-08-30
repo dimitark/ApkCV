@@ -13,11 +13,23 @@
         android:textAlignment="center"
         android:gravity="center"/>
 
+    <ImageView
+        android:id="@+id/more_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@android:drawable/ic_dialog_info"
+        android:visibility="gone" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_below="@id/title"
+        android:layout_above="@id/more_image"
         android:padding="5dp">
 
         <TextView

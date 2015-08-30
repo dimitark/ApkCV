@@ -3,7 +3,7 @@
     <string name="myname">{Dimitar Kotevski}</string>
     <string name="years">Years</string>
     <string name="loading">Loading...</string>
-    <string name="error">Oh no! An error occurred! :(</string>
+    <string name="error">Oh no! An error occurred!</string>
     <string name="timeline_title">Timeline</string>
     <string name="timeline_subtitle">A short glimpse into my life</string>
     <string name="projects_title">Projects</string>
