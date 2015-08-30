@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viewpagerindicator.CirclePageIndicator;
+
 import java.util.List;
 
 import dime.android.apkcv.App;
@@ -14,7 +16,6 @@ import dime.android.apkcv.R;
 import dime.android.apkcv.data.projects.ContentAdapter;
 import dime.android.apkcv.data.rest.projects.Project;
 import dime.android.apkcv.ui.activities.BaseActivity;
-import dime.android.apkcv.ui.views.MyCirclePageIndicator;
 import dime.android.apkcv.ui.views.loading.LoadingView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -26,7 +27,7 @@ import retrofit.client.Response;
 public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
     // The UI components
     private ViewPager contentViewPager;
-    private MyCirclePageIndicator pageIndicator;
+    private CirclePageIndicator pageIndicator;
 
     // The data callback
     private Callback<List<Project>> callback = new Callback<List<Project>>() {
@@ -58,7 +59,7 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
 
         // Get the UI components
         contentViewPager = (ViewPager) rootLayout.findViewById(R.id.content_view_pager);
-        pageIndicator = (MyCirclePageIndicator) rootLayout.findViewById(R.id.page_indicator);
+        pageIndicator = (CirclePageIndicator) rootLayout.findViewById(R.id.page_indicator);
 
         // Call the super
         postOnCreateView(rootLayout);

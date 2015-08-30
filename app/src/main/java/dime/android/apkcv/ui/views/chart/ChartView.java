@@ -24,8 +24,8 @@ public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateL
     private final int TIMELINE_TEXT_HEIGHT = ViewUtils.dipsToPixels(getContext(), 20f);
     private final int TIMELINE_HIGH_BAR_HEIGHT = ViewUtils.dipsToPixels(getContext(), 10f);
     private final int TIMELINE_LOW_BAR_HEIGHT = ViewUtils.dipsToPixels(getContext(), 5f);
-    private final float TIMELINE_STROKE_WIDTH = 5f;
-    private final float BARS_STROKE_WIDTH = 5f;
+    private float TIMELINE_STROKE_WIDTH;
+    private float BARS_STROKE_WIDTH;
     private float BARS_TEXT_SIZE_IN_SP;
     private float TIMELINE_TEXT_SIZE_IN_SP;
 
@@ -147,6 +147,9 @@ public class ChartView extends BaseView implements ValueAnimator.AnimatorUpdateL
         // Set the text sizes
         TIMELINE_TEXT_SIZE_IN_SP = ViewUtils.spToPixels(getContext(), 10f);
         BARS_TEXT_SIZE_IN_SP = ViewUtils.spToPixels(getContext(), 10f);
+        // The stroke width
+        TIMELINE_STROKE_WIDTH = ViewUtils.dipsToPixels(getContext(), 1f);
+        BARS_STROKE_WIDTH = ViewUtils.dipsToPixels(getContext(), 1f);
 
         // Init the animation (if needed)
         if (animateIntro) {
