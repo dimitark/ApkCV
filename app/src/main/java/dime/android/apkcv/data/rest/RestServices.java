@@ -1,11 +1,18 @@
 package dime.android.apkcv.data.rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.Date;
+
 import dime.android.apkcv.BuildConfig;
 import dime.android.apkcv.data.rest.bio.BioService;
+import dime.android.apkcv.data.rest.gson.DateConverter;
 import dime.android.apkcv.data.rest.projects.ProjectsService;
 import dime.android.apkcv.data.rest.skills.SkillsService;
 import dime.android.apkcv.data.rest.timeline.TimelineService;
 import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
 
 /**
  * A simple container for all the REST services
@@ -26,10 +33,15 @@ public class RestServices {
      * Default constructor
      */
     public RestServices() {
+        // Set up GSON
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Date.class, new DateConverter())
+                .create();
 
         // Create the REST services
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(BuildConfig.REST_URL)
+                .setConverter(new GsonConverter(gson))
                 .build();
         // Create the services
         skillsService = restAdapter.create(SkillsService.class);

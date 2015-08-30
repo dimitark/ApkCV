@@ -1,13 +1,15 @@
 package dime.android.apkcv.data.rest.timeline;
 
+import java.util.Date;
+
 /**
  * Created by dime on 29/08/15.
  */
 public class TimelineItem {
     // The year
     private int year;
-    // The data  (string)
-    private String date;
+    // The data
+    private Date date;
     // The info
     private String info;
     // The desc (can be empty)
@@ -38,7 +40,7 @@ public class TimelineItem {
      *
      * @return
      */
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -47,7 +49,7 @@ public class TimelineItem {
      *
      * @param date
      */
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

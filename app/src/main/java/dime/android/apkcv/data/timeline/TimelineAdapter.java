@@ -33,11 +33,11 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineLifeEventHolde
         // Save the data
         this.items = items;
 
-        // Sort it descending by year
+        // Sort it descending by date
         Collections.sort(this.items, new Comparator<TimelineItem>() {
             @Override
             public int compare(TimelineItem lhs, TimelineItem rhs) {
-                return rhs.getYear() - lhs.getYear();
+                return rhs.getDate().compareTo(lhs.getDate());
             }
         });
 
