@@ -7,10 +7,25 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:textColor="@color/project_frame_title"
         android:textSize="14sp"
         android:textAlignment="center"
         android:gravity="center"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_below="@id/title"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/project_content_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/myname_text_color"
+            android:textSize="12sp"
+            android:typeface="monospace"/>
+    </ScrollView>
 </RelativeLayout>

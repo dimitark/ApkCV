@@ -37,17 +37,14 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.2'
     // Android Recycler View
     compile 'com.android.support:recyclerview-v7:21.0.2'
-
     // Picasso - A powerful image downloading and caching library for Android
     // https://github.com/square/picasso
     // Apache License, Version 2.0
     compile 'com.squareup.picasso:picasso:2.5.2'
-
     // Retrofit - A type-safe REST client for Android and Java
     // http://square.github.io/retrofit/
     // Apache License, Version 2.0
     compile 'com.squareup.retrofit:retrofit:1.9.0'
-
     // Android ViewPagerIndicator
     // https://github.com/JakeWharton/ViewPagerIndicator
     // Apache License, Version 2.0

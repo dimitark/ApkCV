@@ -1,5 +1,7 @@
 package dime.android.apkcv.data.rest.projects;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.List;
 
 /**
@@ -9,11 +11,19 @@ public class Project {
     // The name
     private String title;
     // Description
+    @Expose
     private String desc;
+    // The size of the team
+    @Expose
+    private Integer teamSize;
     // The position
-    private List<ProjectPosition> positions;
+    @Expose
+    private List<ProjectPosition> position;
     // The platforms
+    @Expose
     private List<ProjectPlatform> platforms;
+    // The URL
+    private String url;
 
     public String getTitle() {
         return title;
@@ -32,11 +42,11 @@ public class Project {
     }
 
     public List<ProjectPosition> getPosition() {
-        return positions;
+        return position;
     }
 
     public void setPosition(List<ProjectPosition> positions) {
-        this.positions = positions;
+        this.position = positions;
     }
 
     public List<ProjectPlatform> getPlatforms() {
@@ -45,5 +55,21 @@ public class Project {
 
     public void setPlatforms(List<ProjectPlatform> platforms) {
         this.platforms = platforms;
+    }
+
+    public Integer getTeamSize() {
+        return teamSize;
+    }
+
+    public void setTeamSize(Integer teamSize) {
+        this.teamSize = teamSize;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -29,12 +29,11 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/content_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="match_parent"
         android:layout_alignLeft="@id/frame"
         android:layout_alignRight="@id/frame"
         android:layout_alignBottom="@id/frame"
         android:layout_alignTop="@id/frame"
-        android:padding="5dp"
         android:overScrollMode="never"/>
 
     <!-- The loading view -->
