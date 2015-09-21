@@ -3,8 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         releaseconfig {
-            keyAlias 'dimeandroid'
             storeFile file('../../android-release-key.keystore')
+            storePassword "dimitar"
+            keyAlias 'dimeandroid'
+            keyPassword "dimitar"
         }
     }
     compileSdkVersion 21
