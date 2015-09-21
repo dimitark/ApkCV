@@ -21,13 +21,13 @@ android {
             debuggable true
             minifyEnabled false
             // Constants
-            buildConfigField "String", "REST_URL", "\"http://ec2-52-3-16-181.compute-1.amazonaws.com:8080/\""
+            buildConfigField "String", "REST_URL", "\"http://ec2-54-85-150-142.compute-1.amazonaws.com:8080/\""
         }
         release {
             debuggable false
             minifyEnabled false
             // Constants
-            buildConfigField "String", "REST_URL", "\"http://ec2-52-3-16-181.compute-1.amazonaws.com:8080/\""
+            buildConfigField "String", "REST_URL", "\"http://ec2-54-85-150-142.compute-1.amazonaws.com:8080/\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.releaseconfig
         }
