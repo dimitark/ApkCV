@@ -23,13 +23,13 @@ android {
             debuggable true
             minifyEnabled false
             // Constants
-            buildConfigField "String", "REST_URL", "\"https://apkcv.herokuapp.com/\""
+            buildConfigField "String", "REST_URL", "\"http://apkcv-dime.rhcloud.com/\""
         }
         release {
             debuggable false
             minifyEnabled false
             // Constants
-            buildConfigField "String", "REST_URL", "\"https://apkcv.herokuapp.com/\""
+            buildConfigField "String", "REST_URL", "\"http://apkcv-dime.rhcloud.com/\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.releaseconfig
         }
