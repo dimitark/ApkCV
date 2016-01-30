@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import dime.android.apkcv.R;
 import dime.android.apkcv.ui.views.loading.LoadingView;
@@ -25,6 +26,7 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
     private ViewGroup loadingLayout;
     private LoadingView loadingView;
     private View errorText;
+    private Button tryAgainButton;
 
     /**
      * Called from the postOnCreateView. This method should setup the loading view (e.g. colors).
@@ -34,6 +36,11 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
      * @param loadingView
      */
     protected abstract void customizeLoadingView(ViewGroup loadingLayout, LoadingView loadingView);
+
+    /**
+     * Called when the user click on the Try Again button (form the error screen)
+     */
+    protected abstract void handleTryAgain();
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -57,6 +64,15 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
         loadingLayout = (ViewGroup) rootLayout.findViewById(R.id.loading_layout);
         loadingView = (LoadingView) rootLayout.findViewById(R.id.loading_view);
         errorText = rootLayout.findViewById(R.id.error_text);
+        tryAgainButton = (Button) rootLayout.findViewById(R.id.try_again_button);
+
+        // Register a click listener for the try again button
+        tryAgainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleTryAgain();
+            }
+        });
 
         // Let the fragment customize the loading view
         if (loadingLayout != null && loadingView != null) {
@@ -114,6 +130,8 @@ public abstract class BaseFragment<App, BaseActivity> extends Fragment {
     protected void showLoadingScreen() {
         if (loadingLayout != null) {
             loadingLayout.setVisibility(View.VISIBLE);
+            loadingView.setVisibility(View.VISIBLE);
+            errorText.setVisibility(View.GONE);
         }
     }
 

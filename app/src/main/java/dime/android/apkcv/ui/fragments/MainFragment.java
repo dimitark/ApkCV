@@ -60,7 +60,7 @@ public class MainFragment extends BaseFragment<App, BaseActivity> implements Bub
         @Override
         public void failure(RetrofitError error) {
             // Write to the log
-            Log.e(App.LOG_TAG, error.getMessage());
+            Log.e(App.LOG_TAG, "RetrofitError: " + error.getMessage());
             // Show the error screen
             showErrorScreen();
         }
@@ -86,6 +86,14 @@ public class MainFragment extends BaseFragment<App, BaseActivity> implements Bub
     protected void customizeLoadingView(ViewGroup loadingLayout, LoadingView loadingView) {
         // Just show the loading screen
         showLoadingScreen();
+    }
+
+    @Override
+    protected void handleTryAgain() {
+        // Show the loading screen again
+        showLoadingScreen();
+        // Try to fetch the Bio data again
+        app.getRestServices().getBioService().getBio(bioCallback);
     }
 
     @Override

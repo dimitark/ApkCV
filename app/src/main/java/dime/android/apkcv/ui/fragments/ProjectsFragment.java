@@ -46,7 +46,7 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
         @Override
         public void failure(RetrofitError error) {
             // Write to the log
-            Log.e(App.LOG_TAG, error.getMessage());
+            Log.e(App.LOG_TAG, "RetrofitError: " + error.getMessage());
             // Show the error screen
             showErrorScreen();
         }
@@ -82,5 +82,13 @@ public class ProjectsFragment extends BaseFragment<App, BaseActivity> {
     protected void customizeLoadingView(ViewGroup loadingLayout, LoadingView loadingView) {
         // Show the loading screen
         showLoadingScreen();
+    }
+
+    @Override
+    protected void handleTryAgain() {
+        // Show the loading screen again
+        showLoadingScreen();
+        // Try to fetch the data again
+        app.getRestServices().getProjectsService().listProjects(callback);
     }
 }
